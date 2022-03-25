@@ -1,21 +1,26 @@
-const User = require("../models/User");
 const nodemailer = require("nodemailer");
 
-const sendMail = () => {
+const sendMail = async (req, res) => {
+  email = req.body.email;
+  password = req.body.password;
+  receiver = req.body.receiver;
+  subject = req.body.subject;
+  text = req.body.text;
+
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "AssetCalibrationSystemCOMP231",
-      pass: "SoftwareDevelopmentProject1",
+      user: email,
+      pass: password,
     },
     tls: { rejectUnauthorized: false },
   });
 
   let mailOption = {
     from: "AssetCalibrationSystemCOMP231@gmail.com",
-    to: "joelvargasapolinario@gmail.com",
-    subject: "Testing",
-    text: "First test",
+    to: receiver,
+    subject: subject,
+    text: text,
   };
 
   transporter.sendMail(mailOption, (err, success) => {
