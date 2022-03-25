@@ -1,1 +1,1 @@
-//test
+const User = require("../models/User");
