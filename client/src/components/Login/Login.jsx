@@ -6,6 +6,7 @@ import Card from "../UI/Card/Card";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import MainHeader from "../MainHeader/MainHeader";
+import { toast ,ToastContainer } from "react-toastify";
 
 export default function Login(props) {
   let navigate = useNavigate();
@@ -25,9 +26,20 @@ export default function Login(props) {
     const user = await auth.onAuthentication({ email, password });
     if (user) {
       auth.saveToken(user);
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
-  }
+    else{
+      toast.error('The Username or Password is wrong!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+  };
 
   return (
     <React.Fragment>
@@ -39,7 +51,11 @@ export default function Login(props) {
             <div className="col-12" style={{ marginTop: "100px" }}>
               <Card>
                 <Form onSubmit={handleSubmit}>
-                  <Form.Group size="lg" controlId="email" className="form-group">
+                  <Form.Group
+                    size="lg"
+                    controlId="email"
+                    className="form-group"
+                  >
                     <Form.Label className="form-lbl">Email</Form.Label>
                     <Form.Control
                       autoFocus
@@ -48,7 +64,11 @@ export default function Login(props) {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </Form.Group>
-                  <Form.Group size="lg" controlId="password" className="form-group">
+                  <Form.Group
+                    size="lg"
+                    controlId="password"
+                    className="form-group"
+                  >
                     <Form.Label className="form-lbl">Password</Form.Label>
                     <Form.Control
                       type="password"
@@ -65,11 +85,10 @@ export default function Login(props) {
                     Login
                   </Button>
                   <br />
-                  <Button
-                    className="btn btn-custom1 mt-2"
-                    type="button"
-                  >
-                    Recover<br />Password
+                  <Button className="btn btn-custom1 mt-2" type="button">
+                    Recover
+                    <br />
+                    Password
                   </Button>
                 </Form>
               </Card>
@@ -78,6 +97,7 @@ export default function Login(props) {
           <Col xs lg="2"></Col>
         </Row>
       </Container>
+      <ToastContainer />
     </React.Fragment>
   );
 }
