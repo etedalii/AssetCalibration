@@ -1,8 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
-
 import CircleDiv from "./CircleDiv";
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import 'mdbreact/dist/css/mdb.css'; 
+import { DataTable } from 'mdbreact';
+
 
 const TableBody = (props) => {
   const differenceDate = (date1, date2) => {
@@ -26,18 +29,17 @@ const TableBody = (props) => {
       year: "numeric",
       day: "2-digit",
       month: "2-digit",
-    });
-    const items = props.data.data.map((item) => (
-      <tr key={item._id}>
-        <td>
-          <CircleDiv diff={differenceDate(currentDate, item.clibrationDate)} />
-        </td>
-        <td>{item.clibrationDate}</td>
-        <td>{item.sku}</td>
-        <td>{item.name}</td>
-        <td>{item.maintenaceTech}</td>
-        <td>
-          <button
+    }); 
+   
+    // DataTable row 
+    const row = props.data.data.map((item) => ({
+      'Status': <CircleDiv diff={differenceDate(currentDate, item.clibrationDate)} />,
+      'CalibrationDate': item.clibrationDate,
+      'SKU': item.sku,
+      'Equipment': item.name,
+      'Maintenance-Tech': item.maintenaceTech,
+      'buttons': <>
+           <button
             className="btn btn-sm btn-primary me-1"
             onClick={() => props.onEditClick(item._id)}
           >
@@ -48,21 +50,73 @@ const TableBody = (props) => {
             onClick={() => props.onViewClick(item._id)}
           >
             <FontAwesomeIcon icon={faEye} />
-          </button>
+           </button>
+
           <button
             className="btn btn-sm btn-danger me-1"
             onClick={() => props.onDeleteClick(item._id)}
           >
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>
-        </td>
-      </tr>
-    ));
+        </>,
+    }));
+  
+  //include all data into Datatable
+  const data = {
+    columns: [ 
+      {
+        label: 'Status',
+        field: 'Status',
+        sort: 'asc',
+        width: 100
+      },
+      {
+        label: 'Calibration Date',
+        field: 'CalibrationDate',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'SKU',
+        field: 'SKU',
+        sort: 'asc',
+        width: 270
+      },
+      {
+        label: 'Equipment',
+        field: 'Equipment',
+        sort: 'asc',
+        width: 200
+      },
+      {
+        label: 'Maintenance-Tech',
+        field: 'Maintenance-Tech',
+        sort: 'asc',
+        width: 100
+      },
+      {
+        label: ' ',
+        field: 'buttons',
+        sort: 'asc',
+        width: 150
+      }
+    ],
+    rows: row  
+  };
+  console.log(data);
 
-    return <tbody>{items}</tbody>;
-  }
-
-  return <tbody></tbody>;
+  return (
+    <DataTable
+      striped
+      bordered
+      searching={true}
+      order={['CalibrationDate', 'asc' ]} 
+      small 
+      data={data}  
+    />
+  );
+} 
+  return <></>; 
 };
 
 export default TableBody;

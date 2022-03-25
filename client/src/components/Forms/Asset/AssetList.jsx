@@ -110,24 +110,14 @@ const AssetList = () => {
         )}
         {!showAdd && (
           <div className="mt-2">
-            <table className="table table-striped table-hover  table-bordered">
-              <thead className="table-light">
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Calibration Date</th>
-                  <th scope="col">SKU</th>
-                  <th scope="col">Equipment</th>
-                  <th scope="col">Maintenance-Tech</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
+            
               <TableBody
                 data={assets}
                 onEditClick={handleEdit}
                 onDeleteClick={handleDelete}
                 onViewClick={handleView}
               />
-            </table>
+            
           </div>
         )}
       </main>
