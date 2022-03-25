@@ -20,9 +20,13 @@ const sendMail = () => {
 
   transporter.sendMail(mailOption, (err, success) => {
     if (err) {
-      console.log(err);
+      return res.status(404).json({
+        message: "err",
+      });
     } else {
-      console.log("Email sent successfully");
+      return res.status(200).json({
+        message: "email sent",
+      });
     }
   });
 };
