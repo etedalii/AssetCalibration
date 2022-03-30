@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import auth from "../auth/auth";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
 const Navigation = (props) => {
   let navigate = useNavigate();
@@ -20,7 +20,7 @@ const Navigation = (props) => {
       {props.isLoggedIn && (
         <Nav className="me-auto">
           <Nav.Link href="\assetlist">Asset List</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
+          {/* <Nav.Link href="#pricing">Pricing</Nav.Link>
           <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">
@@ -31,7 +31,7 @@ const Navigation = (props) => {
             <NavDropdown.Item href="#action/3.4">
               Separated link
             </NavDropdown.Item>
-          </NavDropdown>
+          </NavDropdown> */}
         </Nav>
       )}
       {!props.isLoggedIn && <Nav className="me-auto"></Nav>}

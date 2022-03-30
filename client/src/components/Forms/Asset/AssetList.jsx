@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import MainHeader from "../../MainHeader/MainHeader";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
@@ -7,9 +6,15 @@ import api from "../../api";
 import TableBody from "./TableBody";
 import AssetAdd from "./AssetAdd";
 import { useNavigate } from "react-router-dom";
+import auth from "../../auth/auth";
 
 const AssetList = () => {
+  const islogin = auth.getToken();
   let navigate = useNavigate();
+  if (islogin === undefined || !islogin) {
+    navigate("/login");
+  }
+
   const [showAdd, setShowAdd] = useState(false);
   const [assets, setAssets] = useState([]);
   const [asset, setAsset] = useState({});
@@ -19,7 +24,7 @@ const AssetList = () => {
       .getAllAssets()
       .then((result) => {
         setAssets(result.data);
-        console.log(assets)
+        console.log(assets);
       })
       .catch((error) => {
         console.log("error in fetch Data:", error);
@@ -41,10 +46,10 @@ const AssetList = () => {
     setShowAdd(true);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm(`Do tou want to delete the Entity ${id} permanently?`)) {
-      api.deleteAssetById(id);
-      setAssets([]);
+      await api.deleteAssetById(id);
+      fetchData();
     }
   };
 
@@ -56,7 +61,7 @@ const AssetList = () => {
         clibrationDate: data.clibrationDate,
         calibrationPeriodicity: data.calibrationPeriodicity,
         maintenaceTech: data.maintenaceTech,
-        enteredNotificationReceiver: data.enteredNotificationReceiver,
+        notificationReceiver: data.notificationReceiver,
         fileName: data.files,
       };
 
@@ -89,38 +94,33 @@ const AssetList = () => {
 
   return (
     <React.Fragment>
-      <MainHeader />
-      <main className="container mt-3">
-        {showAdd && (
-          <AssetAdd
-            saveData={handleSaveData}
-            onCancel={handleReturnClick}
-            _id={id}
-            data={asset}
+      {showAdd && (
+        <AssetAdd
+          saveData={handleSaveData}
+          onCancel={handleReturnClick}
+          _id={id}
+          data={asset}
+        />
+      )}
+      {!showAdd && (
+        <Button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleAddAsset}
+        >
+          Create New Asset <FontAwesomeIcon icon={faAdd} />
+        </Button>
+      )}
+      {!showAdd && (
+        <div className="mt-2">
+          <TableBody
+            data={assets}
+            onEditClick={handleEdit}
+            onDeleteClick={handleDelete}
+            onViewClick={handleView}
           />
-        )}
-        {!showAdd && (
-          <Button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleAddAsset}
-          >
-            Create New Asset <FontAwesomeIcon icon={faAdd} />
-          </Button>
-        )}
-        {!showAdd && (
-          <div className="mt-2">
-            
-              <TableBody
-                data={assets}
-                onEditClick={handleEdit}
-                onDeleteClick={handleDelete}
-                onViewClick={handleView}
-              />
-            
-          </div>
-        )}
-      </main>
+        </div>
+      )}
     </React.Fragment>
   );
 };

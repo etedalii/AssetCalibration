@@ -33,8 +33,7 @@ const AssetView = (props) => {
 
   return (
     <React.Fragment>
-      <MainHeader />
-      <main className="container mt-3">
+      <section className="mt-3">
         <table className="table table-striped table-hover  table-bordered">
           <thead className="table-light">
             <tr>
@@ -144,7 +143,7 @@ const AssetView = (props) => {
             </>
           </div>
         </div>
-      </main>
+      </section>
     </React.Fragment>
   );
 };

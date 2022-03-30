@@ -47,7 +47,7 @@ const AssetAdd = (props) => {
       clibrationDate: enteredcalibrationDate,
       calibrationPeriodicity: enteredperiodicity,
       maintenaceTech: enteredmaintenaceTech,
-      enteredNotificationReceiver: enteredNotificationReceiver,
+      notificationReceiver: enteredNotificationReceiver,
       files: fileList,
     };
 

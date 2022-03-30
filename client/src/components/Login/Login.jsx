@@ -5,7 +5,6 @@ import auth from "../auth/auth";
 import Card from "../UI/Card/Card";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import MainHeader from "../MainHeader/MainHeader";
 import { toast ,ToastContainer } from "react-toastify";
 
 export default function Login(props) {
@@ -43,7 +42,6 @@ export default function Login(props) {
 
   return (
     <React.Fragment>
-      <MainHeader />
       <Container>
         <Row className="justify-content-md-center">
           <Col xs lg="2"></Col>

@@ -3,14 +3,13 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import auth from "../auth/auth";
 import Navigation from "./Navigation";
 const MainHeader = (props) => {
-  const [loggedInUser, setloggedInUser] = useState();
+  const [loggedInUser, setloggedInUser] = useState(true);
   const [userRole, setUserRole] = useState()
 
   useEffect(() => {
-    const islogin = auth.getToken();
-    setloggedInUser(islogin);
-  }, []);
-
+    const islogin = auth.getToken();    
+    setloggedInUser(islogin.email);
+  }, [loggedInUser]);
 
   const getLocalItem = () => {
     const role = JSON.parse(localStorage.getItem('user'))?.role.toUpperCase()
@@ -20,8 +19,6 @@ const MainHeader = (props) => {
   useEffect(() => {
     getLocalItem()
   }, [props.location])
-
-
 
   return (
     <React.Fragment>
