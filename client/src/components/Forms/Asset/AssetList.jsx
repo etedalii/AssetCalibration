@@ -6,14 +6,9 @@ import api from "../../api";
 import TableBody from "./TableBody";
 import AssetAdd from "./AssetAdd";
 import { useNavigate } from "react-router-dom";
-import auth from "../../auth/auth";
 
 const AssetList = () => {
-  const islogin = auth.getToken();
   let navigate = useNavigate();
-  if (islogin === undefined || !islogin) {
-    navigate("/login");
-  }
 
   const [showAdd, setShowAdd] = useState(false);
   const [assets, setAssets] = useState([]);
@@ -24,7 +19,7 @@ const AssetList = () => {
       .getAllAssets()
       .then((result) => {
         setAssets(result.data);
-        console.log(assets);
+        console.log(result.data)
       })
       .catch((error) => {
         console.log("error in fetch Data:", error);
@@ -33,7 +28,7 @@ const AssetList = () => {
 
   useEffect(() => {
     fetchData();
-  }, [assets.prop]);
+  }, []);
 
   const handleAddAsset = () => {
     setShowAdd(true);

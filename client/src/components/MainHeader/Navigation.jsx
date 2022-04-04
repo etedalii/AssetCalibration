@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import auth from "../auth/auth";
 import { Navbar, Nav } from "react-bootstrap";
+import AuthContext from "../../store/auth-context";
 
 const Navigation = (props) => {
   let navigate = useNavigate();
+  const authCtx = useContext(AuthContext)
 
   const handleLogin = () => {
     navigate("/login");
   };
 
   const handleLogout = () => {
-    auth.logout();
+    authCtx.logout();
     navigate("/");
   };
 

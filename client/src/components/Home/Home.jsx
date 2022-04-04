@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import auth  from '../auth/auth'
+import AuthContext from "../../store/auth-context";
 const Home = (props) => {
   let navigate = useNavigate();
-  const islogin = auth.getToken();
+  const authCtx = useContext(AuthContext)
+  const islogin = authCtx.isLoggedIn;
+
   if(islogin === undefined || !islogin){
     navigate("/login");
   }

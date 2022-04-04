@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import auth from "../auth/auth";
 import Card from "../UI/Card/Card";
 import { Container, Row, Col } from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
+import AuthContext from "../../store/auth-context";
+import { signup, login } from "../api";
 import { useNavigate } from "react-router-dom";
-import { toast ,ToastContainer } from "react-toastify";
 
 export default function Login(props) {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const authCtx = useContext(AuthContext);
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -22,26 +24,35 @@ export default function Login(props) {
       return;
     }
 
-    const user = await auth.onAuthentication({ email, password });
-    if (user) {
-      auth.saveToken(user);
-      navigate("/dashboard");
-    }
-    else{
-      toast.error('The Username or Password is wrong!', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+    login({ email, password })
+      .then((res) => {
+        if(res.data !== undefined && res.data.success){
+          return res.data.user;
+        } else{
+          return res.json().then(data => {
+            let errorMessage = 'Authentication failed!';
+            throw new Error(errorMessage);
+          })
+        }
+      }).then(data => {
+         authCtx.login(data)
+         navigate("/dashboard", { replace: true });
+      })
+      .catch((error) => {
+        toast.error("The Username or Password is wrong!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
         });
-    }
+      });
   };
 
   return (
-    <React.Fragment>
+    <>
       <Container>
         <Row className="justify-content-md-center">
           <Col xs lg="2"></Col>
@@ -75,7 +86,6 @@ export default function Login(props) {
                     />
                   </Form.Group>
                   <Button
-                    block
                     className="btn-custom mt-2"
                     type="submit"
                     disabled={!validateForm()}
@@ -96,6 +106,6 @@ export default function Login(props) {
         </Row>
       </Container>
       <ToastContainer />
-    </React.Fragment>
+    </>
   );
 }

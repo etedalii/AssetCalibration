@@ -1,24 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import auth from "../auth/auth";
+import React, { useContext } from "react";
+import { Navbar, Container } from "react-bootstrap";
+import AuthContext from "../../store/auth-context";
 import Navigation from "./Navigation";
 const MainHeader = (props) => {
-  const [loggedInUser, setloggedInUser] = useState(true);
-  const [userRole, setUserRole] = useState()
-
-  useEffect(() => {
-    const islogin = auth.getToken();    
-    setloggedInUser(islogin.email);
-  }, [loggedInUser]);
-
-  const getLocalItem = () => {
-    const role = JSON.parse(localStorage.getItem('user'))?.role.toUpperCase()
-    setUserRole(role)
-  }
-
-  useEffect(() => {
-    getLocalItem()
-  }, [props.location])
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
 
   return (
     <React.Fragment>
@@ -26,17 +12,18 @@ const MainHeader = (props) => {
         <Container>
           <Navbar.Brand href="/">Asset Calibration System</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navigation isLoggedIn={loggedInUser} />
+          <Navigation isLoggedIn={isLoggedIn} />
         </Container>
       </Navbar>
       <div className="title-bar">
         <Container>
-          { userRole &&
-            <font className="title-font">MAINTENANCE {userRole}'S DASHBOARD</font>
-          }
+          {isLoggedIn && (
+            <font className="title-font">
+              MAINTENANCE {authCtx.getRole()}'S DASHBOARD
+            </font>
+          )}
         </Container>
       </div>
-
     </React.Fragment>
   );
 };
