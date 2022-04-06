@@ -12,4 +12,7 @@ router.get("/assets", AssetCtrl.getAssets);
 router.post("/login", AuthController.login);
 router.post("/signup", AuthController.signup);
 router.post("/notifications", emailNotification.sendMail);
+
+router.get("/users", AuthController.getUsers);
+
 module.exports = router;

@@ -14,6 +14,8 @@ export const fileUploadToServer = (payLoad) => api.post('/upload', payLoad)
 export const login = (payLoad) => api.post('/login', payLoad)
 export const signup = (payLoad) => api.post('/signup', payLoad)
 
+export const getAllUsers = () => api.get('/users')
+
 const apis = {
     getAllAssets,
     insertAsset,
@@ -25,6 +27,7 @@ const apis = {
 
     login,
     signup,
+    getAllUsers
 }
 
 export default apis

@@ -18,7 +18,7 @@ createAsset = (req, res) => {
   asset
     .save()
     .then(() => {
-      return res.status(201).json({
+      return res.status(200).json({
         success: true,
         id: asset._id,
         message: "Asset created!",

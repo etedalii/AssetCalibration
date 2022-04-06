@@ -105,7 +105,6 @@ export default function Login(props) {
           <Col xs lg="2"></Col>
         </Row>
       </Container>
-      <ToastContainer />
     </>
   );
 }
