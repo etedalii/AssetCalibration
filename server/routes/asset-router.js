@@ -14,5 +14,8 @@ router.post("/signup", AuthController.signup);
 router.post("/notifications", emailNotification.sendMail);
 
 router.get("/users", AuthController.getUsers);
+router.get("/user/:id", AuthController.getUserById);
+router.put("/user/:id", AuthController.updateUser);
+router.delete("/user/:id", AuthController.deleteUser);
 
 module.exports = router;

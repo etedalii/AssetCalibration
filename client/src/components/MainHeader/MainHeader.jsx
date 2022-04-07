@@ -28,7 +28,7 @@ const MainHeader = (props) => {
         </Container>
         {isLoggedIn && (
           <div className={classes["me-n1"]}>
-            <NavLink className="me-5" to="/mamageuser">
+            <NavLink className="me-5" to="/manageuser">
               Manage Users
             </NavLink>
           </div>

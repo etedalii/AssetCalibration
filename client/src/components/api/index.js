@@ -15,6 +15,10 @@ export const login = (payLoad) => api.post('/login', payLoad)
 export const signup = (payLoad) => api.post('/signup', payLoad)
 
 export const getAllUsers = () => api.get('/users')
+export const insertUser = payLoad => api.post('/user', payLoad) 
+export const getUserById = id => api.get(`/user/${id}`)
+export const updateUserById = (id, payload) => api.put(`/user/${id}`, payload)
+export const deleteUserById = id => api.delete(`/user/${id}`)
 
 const apis = {
     getAllAssets,
@@ -27,7 +31,12 @@ const apis = {
 
     login,
     signup,
-    getAllUsers
+    
+    getAllUsers,
+    insertUser,
+    getUserById,
+    updateUserById,
+    deleteUserById
 }
 
 export default apis

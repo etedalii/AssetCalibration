@@ -19,7 +19,7 @@ function App() {
         <Route path="/assetlist" element={authCtx.isLoggedIn ? <AssetList /> : <Login/>}></Route>
         <Route path="/assetview" element={authCtx.isLoggedIn ? <AssetView /> : <Login/>}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/mamageuser" element={authCtx.isLoggedIn ? <ManageUserList/> :<Login />}></Route>
+        <Route path="/manageuser" element={authCtx.isLoggedIn ? <ManageUserList/> :<Login />}></Route>
         <Route path="/" element={<Home />}></Route>
       </Routes>
     </Layout>

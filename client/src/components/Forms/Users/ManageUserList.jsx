@@ -7,13 +7,12 @@ import { toast, ToastContainer } from "react-toastify";
 import apis from "../../api";
 import TableBody from "./TableBody";
 import UserAdd from "./UserAdd";
-const ManageUserList = () => {
-  let navigate = useNavigate();
-  const [user, setUser] = useState({});
-  const [id, setId] = useState("");
-  const [showAdd, setShowAdd] = useState(false);
-  const [users, setUsers] = useState([]);
 
+const ManageUserList = () => {  
+  const [showAdd, setShowAdd] = useState(false); 
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
+  const [id, setId] = useState(""); 
   const fetchData = async () => {
     await apis
       .getAllUsers()
@@ -37,18 +36,30 @@ const ManageUserList = () => {
     fetchData();
   }, []);
 
-  const handleEdit = () => {};
-  const handleDelete = () => {};
-
   const handleAddUser = () => {
-      setShowAdd(true)
+    setShowAdd(true)
+};
+
+  const handleEdit = async (id) => {
+    setId(id);
+    const entity = await apis.getUserById(id);
+    setUser(entity.data);
+    setShowAdd(true);
   };
+
+  const handleDelete = async (id) => {
+    if (window.confirm(`Do tou want to delete the user permanently?`)) {
+      await apis.deleteUserById(id);
+      fetchData();
+    }
+  };
+
 
   const handleSaveData = async (data) => {
     if (data._id === "") {
         let payLoad = {
-            lastname: data.lastname,
             name: data.name,
+            lastname: data.lastname, 
             email: data.email,
             password: data.password,
             role: data.role,
@@ -84,8 +95,19 @@ const ManageUserList = () => {
             progress: undefined,
           });
         });
+        await apis.insertUser(payLoad).then((res) => {
+          setShowAdd(false);
+          fetchData();
+          setUser({});
+          setId("");
+        });
       } else {
-        //here need to call api for update data
+        await apis.updateUserById(id, data).then((res) => {
+          setShowAdd(false);
+          setUser({});
+          setId("");
+          fetchData();
+        }); 
       }
   };
   const handleReturnClick = () => {

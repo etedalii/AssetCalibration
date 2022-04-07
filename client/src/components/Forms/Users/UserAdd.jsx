@@ -60,9 +60,9 @@ const UserAdd = (props) => {
     }
 
     const data = {
-      _id: props._id,
-      lastname: enteredLastname,
+      _id: props._id, 
       name: enteredName,
+      lastname: enteredLastname,
       email: enteredEmail,
       password: enteredPassword,
       role: enteredRole,
