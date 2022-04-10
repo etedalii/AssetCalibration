@@ -4,7 +4,7 @@ import MainHeader from "../../MainHeader/MainHeader";
 const Layout = (props) => {
   return (
     <Fragment>
-      <main className="container">{props.children}</main>
+      <main>{props.children}</main>
     </Fragment>
   );
 };
