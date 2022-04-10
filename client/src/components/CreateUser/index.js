@@ -33,7 +33,7 @@ const CreateUser = () => {
         <div className="div-border-line p-3 w-100">
           <Form>
             <Form.Group
-              className="mb-3 d-flex flex-row"
+              className="mb-1 d-flex flex-row"
               controlId="formBasicEmail"
               size="sm"
             >
@@ -44,7 +44,7 @@ const CreateUser = () => {
             </Form.Group>
 
             <Form.Group
-              className="mb-3 d-flex flex-row text-color"
+              className="mb-1 d-flex flex-row text-color"
               controlId="formBasicPassword"
             >
               <Form.Label className="w-25 float-right text-right">
@@ -53,7 +53,7 @@ const CreateUser = () => {
               <Form.Control size="sm" className="text-box-color" />
             </Form.Group>
             <Form.Group
-              className="mb-3 d-flex flex-row text-color"
+              className="mb-1 d-flex flex-row text-color"
               controlId="formBasicPassword"
             >
               <Form.Label className="w-25 text-right text-color">
@@ -62,7 +62,7 @@ const CreateUser = () => {
               <Form.Control size="sm" className="text-box-color" />
             </Form.Group>
             <Form.Group
-              className="mb-3 d-flex flex-row mt-5 "
+              className="mb-1 d-flex flex-row mt-4"
               controlId="formBasicPassword"
             >
               <Form.Label className="w-25 text-right ">USER ID:</Form.Label>

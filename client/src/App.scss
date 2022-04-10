@@ -1,12 +1,8 @@
-
-$theme-colors: (
-  "primary": red,
-  );
-
-  @import "../node_modules/bootstrap/scss/bootstrap";
+ @import "bootstrap/scss/bootstrap";
 .App {
   text-align: center;
 }
+
 .btn-danger, .btn-success {
   font-size: 11px !important;
 }
@@ -43,7 +39,8 @@ $theme-colors: (
 
 .text-box-color {
   color: #9cbff9 !important;
-  
+  border-width: 2px !important;
+  border-color: #19264e !important;
 }
 .title-bar {
   height: 50px;
