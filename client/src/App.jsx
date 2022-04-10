@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import React, { useContext } from "react";
 import Home from "./components/Home/Home";
 import CreateUser from "./components/CreateUser";

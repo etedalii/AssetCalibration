@@ -1,7 +1,15 @@
+
+$theme-colors: (
+  "primary": red,
+  );
+
+  @import "../node_modules/bootstrap/scss/bootstrap";
 .App {
   text-align: center;
 }
-
+.btn-danger, .btn-success {
+  font-size: 11px !important;
+}
 .btn-lbl {
   background-color: transparent;
   border-color: transparent;
@@ -9,6 +17,7 @@
 }
 .text-right {
   text-align: right;
+  margin: auto;
   padding-right: 5px;
 }
 .div-border-line {
@@ -28,7 +37,14 @@
 .nav-color {
   background-color: #19264e;
 }
+.text-color {
+  color: #19264e;
+}
 
+.text-box-color {
+  color: #9cbff9 !important;
+  
+}
 .title-bar {
   height: 50px;
   background-color: #9cbff9;
