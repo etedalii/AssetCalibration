@@ -2,6 +2,12 @@
   text-align: center;
 }
 
+.btn-lbl {
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -16,12 +22,12 @@
   background-color: #9cbff9;
   display: flex;
   align-items: center;
-} 
+}
 
 .title-font {
   color: white;
   font-size: small;
-  margin-left: 2rem ;
+  margin-left: 2rem;
 }
 
 .form-group {

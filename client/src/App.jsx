@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useContext } from "react";
 import Home from "./components/Home/Home";
+import CreateUser from "./components/CreateUser";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { Route, Routes } from "react-router-dom";
@@ -16,11 +17,21 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/assetlist" element={authCtx.isLoggedIn ? <AssetList /> : <Login/>}></Route>
-        <Route path="/assetview" element={authCtx.isLoggedIn ? <AssetView /> : <Login/>}></Route>
+        <Route
+          path="/assetlist"
+          element={authCtx.isLoggedIn ? <AssetList /> : <Login />}
+        ></Route>
+        <Route
+          path="/assetview"
+          element={authCtx.isLoggedIn ? <AssetView /> : <Login />}
+        ></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/manageuser" element={authCtx.isLoggedIn ? <ManageUserList/> :<Login />}></Route>
+        <Route
+          path="/manageuser"
+          element={authCtx.isLoggedIn ? <ManageUserList /> : <Login />}
+        ></Route>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/CreateUser" element={<CreateUser />}></Route>
       </Routes>
     </Layout>
   );
