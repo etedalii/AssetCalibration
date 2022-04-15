@@ -62,7 +62,29 @@ const CreateUser = () => {
             </td>
           </tr>
         </table>
-        {displayUserForm && <UserForm />}
+        {displayUserForm && (
+          <div className="div-border-line p-3 w-100">
+            <Form>
+              <UserForm />
+              <Form.Group
+                className="d-flex flex-column"
+                controlId="formBasicPassword"
+              >
+                <div className="align-self-end">
+                  <Button type="submit" className="btn btn-danger px-3 py-1">
+                    Delete
+                  </Button>
+                  <Button type="submit" className="btn btn-warning px-3 py-1">
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="btn btn-success px-3 py-1">
+                    Save
+                  </Button>
+                </div>
+              </Form.Group>
+            </Form>
+          </div>
+        )}
       </div>
     </>
   );
