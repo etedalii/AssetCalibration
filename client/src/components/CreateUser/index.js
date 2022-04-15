@@ -20,10 +20,12 @@ const CreateUser = () => {
       </Navbar>
       <div className="title-bar w-100 px-3">
         <div className="d-flex justify-content-between w-100">
-          <span>maintenance supervisor dashboard</span>
+          <span className="text-sub-navbar">
+            Maintenance supervisor dashboard
+          </span>
           <div>
-            <span className="me-3">Manage User</span>
-            <span>Add Asset</span>
+            <span className="me-3 text-sub-navbar">Manage User</span>
+            <span className="text-sub-navbar">Add Asset</span>
           </div>
         </div>
       </div>
@@ -37,7 +39,7 @@ const CreateUser = () => {
               controlId="formBasicEmail"
               size="sm"
             >
-              <Form.Label className="w-25 text-right text-color">
+              <Form.Label className="w-25 text-right">
                 EMAIL ADDRESS:
               </Form.Label>
               <Form.Control size="sm" type="email" className="text-box-color" />

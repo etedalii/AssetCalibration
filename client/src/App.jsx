@@ -2,6 +2,7 @@ import "./App.scss";
 import React, { useContext } from "react";
 import Home from "./components/Home/Home";
 import CreateUser from "./components/CreateUser";
+import ActiveUser from "./components/ActiveUser";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { Route, Routes } from "react-router-dom";
@@ -31,7 +32,8 @@ function App() {
           element={authCtx.isLoggedIn ? <ManageUserList /> : <Login />}
         ></Route>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/CreateUser" element={<CreateUser />}></Route>
+        <Route path="/createUser" element={<CreateUser />}></Route>
+        <Route path="/activeUser" element={<ActiveUser />}></Route>
       </Routes>
     </Layout>
   );
