@@ -1,9 +1,25 @@
 import React, { useState, useEffect } from "react";
 import UserForm from "../../miniComponents/UserForm";
+import api from "../api";
 import { Navbar, FormControl, Form, Container, Button } from "react-bootstrap";
 const CreateUser = () => {
-  const [displayUserForm, setDisplayUserForm] = useState(false);
-
+  const [displayUserForm, setDisplayUserForm] = useState(undefined);
+  const [users, setUsers] = useState("");
+  const [user, setUser] = useState(undefined);
+  const fetchData = async () => {
+    await api
+      .getAllUsers()
+      .then((result) => {
+        setUsers(result.data.data);
+      })
+      .catch((error) => {
+        //   console.log("error in fetch Data:", error);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  console.log("Este", user);
   return (
     <>
       <Navbar expand="xs" className="nav-color w-100 " variant="dark">
@@ -43,38 +59,45 @@ const CreateUser = () => {
             <th>POSITION</th>
             <th>Action</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>Joel</td>
-            <td>Technician</td>
-            <td>
-              <Button
-                className="py-0"
-                onClick={() => {
-                  displayUserForm
-                    ? setDisplayUserForm(false)
-                    : setDisplayUserForm(true);
-                }}
-              >
-                Edit
-              </Button>
-            </td>
-          </tr>
+
+          {users &&
+            users.map((item, index) => (
+              <tr key={index}>
+                <td>{index} </td>
+                <td>{item._id}</td>
+                <td>{item.name + " " + item.lastname}</td>
+                <td>{item.role}</td>
+                <td>
+                  <Button
+                    className="py-0"
+                    onClick={() => {
+                      setDisplayUserForm(true);
+
+                      setUser(item);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                </td>
+              </tr>
+            ))}
         </table>
-        {displayUserForm && (
+        {displayUserForm && user && (
           <div className="div-border-line p-3 w-100">
             <Form>
-              <UserForm />
+              <UserForm data={user} />
               <Form.Group
                 className="d-flex flex-column"
                 controlId="formBasicPassword"
               >
                 <div className="align-self-end">
-                  <Button type="submit" className="btn btn-danger px-3 py-1">
-                    Delete
-                  </Button>
-                  <Button type="submit" className="btn btn-warning px-3 py-1">
+                  <Button className="btn btn-danger px-3 py-1">Delete</Button>
+                  <Button
+                    className="btn btn-warning px-3 py-1"
+                    onClick={() => {
+                      setDisplayUserForm(false);
+                    }}
+                  >
                     Cancel
                   </Button>
                   <Button type="submit" className="btn btn-success px-3 py-1">
