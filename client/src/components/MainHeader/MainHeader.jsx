@@ -9,6 +9,10 @@ const MainHeader = (props) => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
 
+  const handleLogout= () => {
+    authCtx.logout();
+  }
+
   return (
     <React.Fragment>
       <Navbar expand="xs" className="nav-color w-100 " variant="dark">
@@ -24,7 +28,7 @@ const MainHeader = (props) => {
             className={`bi bi-search fa-search position-absolute  top-50 translate-middle s-2`}
           ></i>
         </Form.Group>
-        <button className="me-3 btn-lbl">logout</button>
+        <button className="me-3 btn-lbl" onClick={handleLogout}>logout</button>
       </Navbar>
       <div className="title-bar w-100 px-3">
         <div className="d-flex justify-content-between w-100">
