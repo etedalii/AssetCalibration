@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import api from "../../api";
 import TableBody from "./TableBody";
 import AssetAdd from "./AssetAdd";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../../store/auth-context";
+import { toast } from "react-toastify";
 
 const AssetList = () => {
   let navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
 
   const [showAdd, setShowAdd] = useState(false);
   const [assets, setAssets] = useState([]);
@@ -35,6 +38,18 @@ const AssetList = () => {
   };
 
   const handleEdit = async (id) => {
+    if(!authCtx.isLoggedIn){
+      toast.error("You need to login first!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return
+    }
     setId(id);
     const entity = await api.getAssetById(id);
     setAsset(entity.data);
@@ -42,6 +57,18 @@ const AssetList = () => {
   };
 
   const handleDelete = async (id) => {
+    if(!authCtx.isLoggedIn){
+      toast.error("You need to login first!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return
+    }
     if (window.confirm(`Do tou want to delete the Entity ${id} permanently?`)) {
       await api.deleteAssetById(id);
       fetchData();
@@ -83,13 +110,26 @@ const AssetList = () => {
   };
 
   const handleView = async (id) => {
+    if(!authCtx.isLoggedIn){
+      toast.error("You need to login first!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return
+    }
     const entity = await api.getAssetById(id);
     navigate("/assetview", { state: { data: entity.data.data } });
   };
 
   return (
     <React.Fragment>
-      {showAdd && (
+      <Container>
+      {authCtx.isLoggedIn && showAdd && (
         <AssetAdd
           saveData={handleSaveData}
           onCancel={handleReturnClick}
@@ -97,7 +137,7 @@ const AssetList = () => {
           data={asset}
         />
       )}
-      {!showAdd && (
+      {authCtx.isLoggedIn && !showAdd && (
         <Button
           type="button"
           className="btn btn-primary"
@@ -113,9 +153,11 @@ const AssetList = () => {
             onEditClick={handleEdit}
             onDeleteClick={handleDelete}
             onViewClick={handleView}
+            isLoggedIn= {authCtx.isLoggedIn}
           />
         </div>
       )}
+      </Container>
     </React.Fragment>
   );
 };

@@ -17,7 +17,7 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/dashboard" element={<AssetList />}></Route>
         <Route
           path="/assetlist"
           element={authCtx.isLoggedIn ? <AssetList /> : <Login />}
@@ -31,7 +31,7 @@ function App() {
           path="/manageuser"
           element={authCtx.isLoggedIn ? <ManageUserList /> : <Login />}
         ></Route>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<AssetList />}></Route>
         <Route path="/createUser" element={<CreateUser />}></Route>
         <Route path="/activeUser" element={<ActiveUser />}></Route>
       </Routes>
