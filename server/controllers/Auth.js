@@ -20,7 +20,7 @@ const signup = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email });
   if (!user || !(await user.isPasswordMatch(password))) {
@@ -36,7 +36,7 @@ const login = async (req, res) => {
     user: user,
     message: "Successfully logged in!",
   });
-}
+};
 
 const getUsers = async (req, res) => {
   await User.find({}, (err, users) => {
@@ -44,12 +44,13 @@ const getUsers = async (req, res) => {
       return res.status(400).json({ success: false, error: err });
     }
     if (!users.length) {
-      return res.status(200).json({ success: true, data: users, message: `User is empty` });
+      return res
+        .status(200)
+        .json({ success: true, data: users, message: `User is empty` });
     }
     return res.status(200).json({ success: true, data: users });
   }).catch((err) => console.log(err));
 };
- 
 
 const updateUser = async (req, res) => {
   const body = req.body;
@@ -67,12 +68,12 @@ const updateUser = async (req, res) => {
         err,
         message: "User not found!",
       });
-    } 
+    }
     user.name = body.name;
     user.lastname = body.lastname;
     user.email = body.email;
     user.password = body.password;
-    user.role = body.role; 
+    user.role = body.role;
     user
       .save()
       .then(() => {
@@ -90,7 +91,6 @@ const updateUser = async (req, res) => {
       });
   });
 };
-
 
 const deleteUser = async (req, res) => {
   await User.findOneAndDelete({ _id: req.params.id }, (err, user) => {
@@ -116,11 +116,28 @@ const getUserById = async (req, res) => {
   }).catch((err) => console.log(err));
 };
 
+const insertUser = async (req, res) => {
+  const body = req.body;
+  if (!body) {
+    return res.status(400).json({
+      success: false,
+      error: "You must provide an user",
+    });
+  }
+  console.log("testing");
+  const user = new User(body);
+
+  if (!user) {
+    return res.status(400).json({ success: false, error: err });
+  }
+};
+
 module.exports = {
   login,
-  signup, 
+  signup,
   updateUser,
   deleteUser,
   getUsers,
   getUserById,
+  insertUser,
 };

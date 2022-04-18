@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const roles = ['Supervisor', 'Staff'];
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const userSchema = mongoose.Schema(
   {
@@ -9,26 +8,23 @@ const userSchema = mongoose.Schema(
       trim: true,
     },
     lastname: {
-      type: String, 
-      trim: true
+      type: String,
+      trim: true,
     },
     email: {
       type: String,
-      required: true,
       unique: true,
       trim: true,
       lowercase: true,
     },
     password: {
       type: String,
-      required: true,
       trim: true,
       private: true, // used by the toJSON plugin
     },
     role: {
       type: String,
-      enum: roles,
-      default: 'Staff',
+      default: "Staff",
     },
   },
   {
@@ -46,14 +42,14 @@ userSchema.methods.isPasswordMatch = async function (password) {
   return bcrypt.compare(password, user.password);
 };
 
-userSchema.pre('save', async function (next) {
+userSchema.pre("save", async function (next) {
   const user = this;
-  if (user.isModified('password')) {
+  if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 8);
   }
   next();
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
