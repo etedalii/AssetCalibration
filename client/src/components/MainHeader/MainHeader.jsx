@@ -35,7 +35,7 @@ const MainHeader = (props) => {
             <NavLink className="me-5 text-sub-navbar" to="/manageuser">
               <span className="me-3 ">Manage User</span>
             </NavLink>
-            <span className="text-sub-navbar">Add Asset</span>
+            <NavLink  className="text-sub-navbar" to='assetlist'>Asset List</NavLink>
           </div>
         </div>
       </div>
