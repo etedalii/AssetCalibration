@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navbar, Container, Form, FormControl } from "react-bootstrap";
 import {  NavLink } from "react-router-dom";
-import AuthContext from "../../store/auth-context";
+import AuthContext from "../../store/auth-context"; 
 
 const MainHeader = (props) => {
   const authCtx = useContext(AuthContext);
@@ -18,12 +18,11 @@ const MainHeader = (props) => {
       <Navbar expand="xs" className="nav-color w-100 " variant="dark">
         <Form.Group
           className={"ms-3 d-flex justify-content-end position-relative  me-3"}
-        >
-          <FormControl
-            placeholder={"Search"}
-            className="rounded-pill "
-            aria-describedby="basic-addon1"
-          />
+        > 
+          <NavLink className="me-3 btn-lbl" to="/">
+            <i className="fas fa-home"> Asset Calibration</i>
+             
+          </NavLink>
           <i
             className={`bi bi-search fa-search position-absolute  top-50 translate-middle s-2`}
           ></i>

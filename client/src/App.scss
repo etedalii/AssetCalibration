@@ -128,6 +128,12 @@ table, td, th {
   color: #61dafb;
 }
 
+.form-control.form-control-sm {
+  border-radius: 20px; 
+  line-height: 2rem;   
+  color:#e3593d;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -14,3 +14,7 @@ code {
 .main-bg-color {
   background-color: rgba(32, 56, 100, 255);
 }
+
+main{
+  margin: 50px;
+}
