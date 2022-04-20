@@ -110,18 +110,6 @@ const AssetList = () => {
   };
 
   const handleView = async (id) => {
-    if(!authCtx.isLoggedIn){
-      toast.error("You need to login first!", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      return
-    }
     const entity = await api.getAssetById(id);
     navigate("/assetview", { state: { data: entity.data.data } });
   };

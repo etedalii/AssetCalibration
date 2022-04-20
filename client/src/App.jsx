@@ -24,7 +24,7 @@ function App() {
         ></Route>
         <Route
           path="/assetview"
-          element={authCtx.isLoggedIn ? <AssetView /> : <Login />}
+          element={<AssetView />}
         ></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route
