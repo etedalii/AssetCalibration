@@ -11,6 +11,7 @@ const apiPort = 3001;
 
 // Accessing the path module
 const path = require("path");
+
 // Step 1:
 app.use(express.static(path.resolve(__dirname, "../../client/build")));
 // Step 2:
