@@ -3,8 +3,8 @@ const fileupload = require("express-fileupload");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const db = require("./db");
-const assetRouter = require("./routes/asset-router");
+const db = require("./server/db");
+const assetRouter = require("./server/routes/asset-router");
 
 const app = express();
 const apiPort = 3001;
