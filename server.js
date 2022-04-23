@@ -13,7 +13,7 @@ var apiPort = normalizePort(process.env.PORT || '3001');
 const path = require("path");
 console.log(path)
 //app.use(express.static("./client/build"));
-app.use(express.static(path.join(__dirname, "./public")));
+app.use(express.static(path.join(__dirname, "./client/build")));
 app.use(express.static(path.join(__dirname, "./node_modules")));
 
 app.use(cors());
@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 app.use("/api", assetRouter);
