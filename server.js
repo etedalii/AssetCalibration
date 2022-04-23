@@ -12,9 +12,9 @@ var apiPort = normalizePort(process.env.PORT || '3001');
 // Accessing the path module
 const path = require("path");
 console.log(path)
-app.use(express.static("client/build"));
-//app.use(express.static(path.join(__dirname, "../../public")));
-//app.use(express.static(path.join(__dirname, "../../node_modules")));
+//app.use(express.static("./client/build"));
+app.use(express.static(path.join(__dirname, "./public")));
+app.use(express.static(path.join(__dirname, "./node_modules")));
 
 app.use(cors());
 app.use(fileupload());
