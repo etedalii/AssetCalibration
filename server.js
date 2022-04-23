@@ -7,7 +7,23 @@ const db = require("./server/db");
 const assetRouter = require("./server/routes/asset-router");
 
 const app = express();
-var apiPort = process.env.PORT || '3001';
+var apiPort = normalizePort(process.env.PORT || '3001');
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
 
 // Accessing the path module
 const path = require("path");
@@ -39,9 +55,9 @@ app.get("/", (req, res) => {
   res.send("Asset Calibration System");
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 app.use("/api", assetRouter);
 

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-
+//process.env.MONGODB_URI ||
 mongoose
     //.connect('mongodb://127.0.0.1:27017/asset_db', { useNewUrlParser: true })  // LOCAL ADDRESS
-    .connect(process.env.MONGODB_URI || 'mongodb+srv://admin:J48v3xNiSZWJSd3f@cluster0.fnvqu.mongodb.net/asset_calibration_db?retryWrites=true&w=majority', {useUnifiedTopology: true, useNewUrlParser: true }) // CLOUD
+    .connect('mongodb+srv://admin:J48v3xNiSZWJSd3f@cluster0.fnvqu.mongodb.net/asset_calibration_db?retryWrites=true&w=majority', {useUnifiedTopology: true, useNewUrlParser: true }) // CLOUD
     .catch(e => {
         console.error('Connection error', e.message)
     })
