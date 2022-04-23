@@ -3,11 +3,33 @@ const fileupload = require("express-fileupload");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const db = require("./db");
-const assetRouter = require("./routes/asset-router");
+const db = require("./server/db");
+const assetRouter = require("./server/routes/asset-router");
 
 const app = express();
-const apiPort = 3001;
+var apiPort = normalizePort(process.env.PORT || '3001');
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+// Accessing the path module
+const path = require("path");
+//app.use(express.static("./client/build"));
+app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "./node_modules")));
 
 app.use(cors());
 app.use(fileupload());
@@ -32,6 +54,10 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.get("/", (req, res) => {
   res.send("Asset Calibration System");
 });
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 app.use("/api", assetRouter);
 
