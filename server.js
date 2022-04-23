@@ -7,11 +7,10 @@ const db = require("./server/db");
 const assetRouter = require("./server/routes/asset-router");
 
 const app = express();
-var apiPort = normalizePort(process.env.PORT || '3001');
+var apiPort = process.env.PORT || '3001';
 
 // Accessing the path module
 const path = require("path");
-console.log(path)
 //app.use(express.static("./client/build"));
 app.use(express.static(path.join(__dirname, "./client/build")));
 app.use(express.static(path.join(__dirname, "./node_modules")));
